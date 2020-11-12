@@ -30,9 +30,25 @@ def parseHtml(url):
 # Connect to the URL
     parsedPage = soup(pageHtml,"html.parser")
     tag     = parsedPage.body
+    
+    #Global numbers
     numbers = tag.findAll('div',{'class':'maincounter-number'})
-    #print(numbers)
+    
+    #Active and closed cases
     cases   = tag.findAll('div',{'class':'number-table-main'})
+
+    #Get data about Serbia
+    #soup.select('#main_table_countries_today tr:has(> td:contains("Serbia"))')
+    table   = tag.select('#main_table_countries_today tr:has(> td:contains("Serbia"))')
+    #print(len(table[0])) ?????
+    
+    for singleTd in table[0]:
+        print(singleTd)
+    exit(0)
+    #regular expression to find hole row
+
+    #print(table)
+    #exit(0)
 
     tempCasesData = []
 
@@ -56,5 +72,5 @@ def parseHtml(url):
 
 
     print(data)
-    exit(0)
+    
     return tag.findAll('div',{'class':'maincounter-number'})
