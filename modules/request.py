@@ -40,15 +40,10 @@ def parseHtml(url):
     #Get data about Serbia
     #soup.select('#main_table_countries_today tr:has(> td:contains("Serbia"))')
     table   = tag.select('#main_table_countries_today tr:has(> td:contains("Serbia"))')
-    #print(len(table[0])) ?????
-    
-    for singleTd in table[0]:
-        print(singleTd)
-    exit(0)
-    #regular expression to find hole row
+    print(table[0].find_all('td')[5])
+    # TODO all daya group by needed country and and export {}
 
-    #print(table)
-    #exit(0)
+    exit(0)
 
     tempCasesData = []
 
