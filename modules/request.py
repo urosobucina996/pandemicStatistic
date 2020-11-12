@@ -40,10 +40,21 @@ def parseHtml(url):
     #Get data about Serbia
     #soup.select('#main_table_countries_today tr:has(> td:contains("Serbia"))')
     table   = tag.select('#main_table_countries_today tr:has(> td:contains("Serbia"))')
-    print(table[0].find_all('td')[5])
-    # TODO all daya group by needed country and and export {}
+    #print(table[0].find_all('td'))
+    countryData = table[0].find_all('td')
 
-    exit(0)
+    countries = { 
+        "Serbia" : {
+            "totalCases"    : countryData[2].text,
+            "newCases"      : countryData[3].text,
+            "totalDeaths"   : countryData[4].text,
+            "newDeaths"     : countryData[5].text,
+            "totalRecove"   : countryData[6].text,
+            "activeCases"   : countryData[8].text,
+            "seriousCritic" : countryData[9].text
+        }
+    }
+    # TODO all daya group by needed country and and export {}
 
     tempCasesData = []
 
@@ -62,10 +73,11 @@ def parseHtml(url):
         "numberOfDeaths"    : tempData[1],
         "numberOfRecovered" : tempData[2],
         "activeCases"       : tempCasesData[0],
-        "closedCases"       : tempCasesData[1]
+        "closedCases"       : tempCasesData[1],
+        "groupByCountry"    : countries
     }
 
 
     print(data)
-    
+    exit(0)
     return tag.findAll('div',{'class':'maincounter-number'})
