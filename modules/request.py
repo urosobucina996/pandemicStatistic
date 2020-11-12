@@ -29,10 +29,17 @@ def parseHtml(url):
 #html parsing
 # Connect to the URL
     parsedPage = soup(pageHtml,"html.parser")
-    tag = parsedPage.body
+    tag     = parsedPage.body
     numbers = tag.findAll('div',{'class':'maincounter-number'})
     #print(numbers)
+    cases   = tag.findAll('div',{'class':'number-table-main'})
 
+    tempCasesData = []
+
+    for single in cases:
+        tempCasesData.append(int(single.text.replace(',','')))
+
+   
     tempData = []
 
     for single in numbers:
@@ -42,7 +49,9 @@ def parseHtml(url):
     data = {
         "numberOfCases"     : tempData[0],
         "numberOfDeaths"    : tempData[1],
-        "numberOfRecovered" : tempData[2]
+        "numberOfRecovered" : tempData[2],
+        "activeCases"       : tempCasesData[0],
+        "closedCases"       : tempCasesData[1]
     }
 
 
