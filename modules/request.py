@@ -37,24 +37,28 @@ def parseHtml(url):
     #Active and closed cases
     cases   = tag.findAll('div',{'class':'number-table-main'})
 
+    countries = []
+
+    for state in ["Serbia","Bosnia and Herzegovina","Montenegro","Croatia"]:
+        
+        table   = tag.select("#main_table_countries_today tr:has(> td:contains(\""+state+"\"))")
+        countryData = table[0].find_all('td')
+
+        countries.append({ 
+            ""+state+"" : {
+                "totalCases"    : countryData[2].text,
+                "newCases"      : countryData[3].text,
+                "totalDeaths"   : countryData[4].text,
+                "newDeaths"     : countryData[5].text,
+                "totalRecove"   : countryData[6].text,
+                "activeCases"   : countryData[8].text,
+                "seriousCritic" : countryData[9].text
+            }
+        })
+
+
     #Get data about Serbia
     #soup.select('#main_table_countries_today tr:has(> td:contains("Serbia"))')
-    table   = tag.select('#main_table_countries_today tr:has(> td:contains("Serbia"))')
-    #print(table[0].find_all('td'))
-    countryData = table[0].find_all('td')
-
-    countries = { 
-        "Serbia" : {
-            "totalCases"    : countryData[2].text,
-            "newCases"      : countryData[3].text,
-            "totalDeaths"   : countryData[4].text,
-            "newDeaths"     : countryData[5].text,
-            "totalRecove"   : countryData[6].text,
-            "activeCases"   : countryData[8].text,
-            "seriousCritic" : countryData[9].text
-        }
-    }
-    # TODO all daya group by needed country and and export {}
 
     tempCasesData = []
 
