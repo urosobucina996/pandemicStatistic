@@ -82,6 +82,6 @@ def parseHtml(url):
     }
 
 
-    print(data)
-    exit(0)
-    return tag.findAll('div',{'class':'maincounter-number'})
+    #print(data)
+    #exit(0)
+    #return tag.findAll('div',{'class':'maincounter-number'})
