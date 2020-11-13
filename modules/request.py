@@ -39,7 +39,7 @@ def parseHtml(url):
 
     countries = []
 
-    for state in ["Serbia","Bosnia and Herzegovina","Montenegro","Croatia"]:
+    for state in ["Serbia","Bosnia and Herzegovina","Bulgaria","Montenegro","Croatia"]:
         
         table   = tag.select("#main_table_countries_today tr:has(> td:contains(\""+state+"\"))")
         countryData = table[0].find_all('td')
