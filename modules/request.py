@@ -82,7 +82,7 @@ def parseHtml(url):
         "groupByCountry"    : countries
     }
 
-
+    return json.dumps(data)
     print(json.dumps(data))
     exit(0)
     #return tag.findAll('div',{'class':'maincounter-number'})
