@@ -2,6 +2,7 @@ import requests as req
 from bs4 import BeautifulSoup as soup
 
 import sys 
+import json
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
 
@@ -82,6 +83,6 @@ def parseHtml(url):
     }
 
 
-    #print(data)
-    #exit(0)
+    print(json.dumps(data))
+    exit(0)
     #return tag.findAll('div',{'class':'maincounter-number'})
