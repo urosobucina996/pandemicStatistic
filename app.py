@@ -4,7 +4,7 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/flask')
+@app.route('/flask', methods=['GET'])
 def start():
     start = time.time()
     try:
