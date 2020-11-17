@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { Table } from 'antd';
+import HeaderCard from '../HeaderCard/HeaderCard';
 
 export default class PandemicReport extends React.Component {
     state = {
@@ -114,6 +115,7 @@ export default class PandemicReport extends React.Component {
             <h3>{this.state.data.numberOfRecovered}</h3>
             <h3>{this.state.data.activeCases}</h3>
             <h3>{this.state.data.closedCases}</h3>
+            <HeaderCard />
             <Table dataSource={this.state.countries} columns={this.columns} />
         </div>
       );
