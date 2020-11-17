@@ -23,9 +23,14 @@ export default class PandemicReport extends React.Component {
     componentDidMount() {
       axios.get(`http://localhost:5000/flask`,{ headers:this.headers})
         .then(res => {
+          //console.log(res.data);
           this.setState({
             data: res.data
           })
+          // Get key of groupCountries
+          // this.state.data.groupByCountry.map(country =>{
+          //   console.log(Object.keys(country)[0]);
+          // });
         })
         .catch( err => {
             console.log(err)
@@ -40,6 +45,15 @@ export default class PandemicReport extends React.Component {
             <h3>{this.state.data.numberOfRecovered}</h3>
             <h3>{this.state.data.activeCases}</h3>
             <h3>{this.state.data.closedCases}</h3>
+            <table>
+               <tbody>
+                 <tr>
+                    {/* {this.state.data.groupByCountry.map(country =>{
+                      <td>{country}</td>
+                    })} */}
+                 </tr>
+               </tbody>
+            </table>
         </div>
       );
     }
