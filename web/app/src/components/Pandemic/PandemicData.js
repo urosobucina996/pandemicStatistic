@@ -11,7 +11,7 @@ export default class PandemicReport extends React.Component {
         countries : []
       }
 
-
+      // izdovjiti u json fajl
       columns = [
         {
           title: 'Country',
@@ -40,8 +40,8 @@ export default class PandemicReport extends React.Component {
         },
         {
           title: 'Total Recover',
-          dataIndex: 'totalRecover',
-          key: 'totalRecover',
+          dataIndex: 'totalRecove',
+          key: 'totalRecove',
         },
         {
           title: 'Active Cases',
@@ -50,8 +50,8 @@ export default class PandemicReport extends React.Component {
         },
         {
           title: 'Critic',
-          dataIndex: 'critic',
-          key: 'critic',
+          dataIndex: 'seriousCritic',
+          key: 'seriousCritic',
         },
       ];
 
@@ -80,13 +80,7 @@ export default class PandemicReport extends React.Component {
             return {
               key          : Object.keys(single)[0],
               country      : Object.keys(single)[0],
-              totalCases   : object.totalCases,
-              totalDeaths  : object.totalDeaths,
-              totalRecover : object.totalRecove,
-              critic       : object.seriousCritic,
-              activeCases  : object.activeCases,
-              newDeaths    : object.newDeaths,
-              newCases     : object.newCases
+              ...object
             }
           })
           this.setState({
