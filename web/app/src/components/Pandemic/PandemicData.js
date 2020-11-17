@@ -2,10 +2,12 @@ import React from 'react';
 
 import axios from 'axios';
 
+import TableRow from '../TableRow/TableRow';
 
 export default class PandemicReport extends React.Component {
     state = {
-        data: []
+        data: [],
+        countries : []
       }
 
     
@@ -27,32 +29,46 @@ export default class PandemicReport extends React.Component {
           this.setState({
             data: res.data
           })
+          const state = this.state.data.groupByCountry.map(country => {
+            //console.log(country);
+            return <TableRow key = {Object.keys(country)[0]}  data = {country} />
+          })
+          this.setState({
+            countries: state
+          });
           // Get key of groupCountries
           // this.state.data.groupByCountry.map(country =>{
           //   console.log(Object.keys(country)[0]);
           // });
+          
         })
         .catch( err => {
             console.log(err)
         });
     }
+    
+    
 
     render() {
       return (
         <div>
-            <h3>{this.state.data.numberOfCases}</h3>
+            <h2>{this.state.data.numberOfCases}</h2>
             <h3>{this.state.data.numberOfDeaths}</h3>
             <h3>{this.state.data.numberOfRecovered}</h3>
             <h3>{this.state.data.activeCases}</h3>
             <h3>{this.state.data.closedCases}</h3>
-            <table>
-               <tbody>
-                 <tr>
-                    {/* {this.state.data.groupByCountry.map(country =>{
-                      <td>{country}</td>
-                    })} */}
-                 </tr>
-               </tbody>
+            <table style={{width: "100% "}}>
+                <tr>
+                  <th>Country</th>
+                  <th>Total Cases</th>
+                  <th>New Cases</th>
+                  <th>Total Deaths</th>
+                  <th>New Deaths</th>
+                  <th>Total Revocer</th>
+                  <th>Active Cases</th>
+                  <th>Critic</th>
+                </tr>
+                {this.state.countries}
             </table>
         </div>
       );
