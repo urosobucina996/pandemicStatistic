@@ -1,14 +1,58 @@
 import React from 'react';
 
 import axios from 'axios';
-
-import TableRow from '../TableRow/TableRow';
+import 'antd/dist/antd.css';
+import { Table } from 'antd';
 
 export default class PandemicReport extends React.Component {
     state = {
         data: [],
         countries : []
       }
+
+
+      columns = [
+        {
+          title: 'Country',
+          dataIndex: 'country',
+          key: 'country',
+        },
+        {
+          title: 'Total Cases',
+          dataIndex: 'totalCases',
+          key: 'totalCases',
+        },
+        {
+          title: 'New Cases',
+          dataIndex: 'newCases',
+          key: 'newCases',
+        },
+        {
+          title: 'Total Deaths',
+          dataIndex: 'totalDeaths',
+          key: 'totalDeaths',
+        },
+        {
+          title: 'New Deaths',
+          dataIndex: 'newDeaths',
+          key: 'newDeaths',
+        },
+        {
+          title: 'Total Recover',
+          dataIndex: 'totalRecover',
+          key: 'totalRecover',
+        },
+        {
+          title: 'Active Cases',
+          dataIndex: 'activeCases',
+          key: 'activeCases',
+        },
+        {
+          title: 'Critic',
+          dataIndex: 'critic',
+          key: 'critic',
+        },
+      ];
 
     
     headers = {
@@ -25,17 +69,30 @@ export default class PandemicReport extends React.Component {
     componentDidMount() {
       axios.get(`http://localhost:5000/flask`,{ headers:this.headers})
         .then(res => {
-          //console.log(res.data);
+          console.log(res.data);
           this.setState({
             data: res.data
           })
-          const state = this.state.data.groupByCountry.map(country => {
-            //console.log(country);
-            return <TableRow key = {Object.keys(country)[0]}  data = {country} />
+          const state = this.state.data.groupByCountry.map(single => {
+            let object = single[Object.keys(single)[0]];
+            
+            return {
+              key          : Object.keys(single)[0],
+              country      : Object.keys(single)[0],
+              totalCases   : object.totalCases,
+              totalDeaths  : object.totalDeaths,
+              totalRecover : object.totalRecove,
+              critic       : object.seriousCritic,
+              activeCases  : object.activeCases,
+              newDeaths    : object.newDeaths,
+              newCases     : object.newCases
+            }
           })
           this.setState({
-            countries: state
+            countries : state
           });
+
+          console.log(this.state.countries);
           // Get key of groupCountries
           // this.state.data.groupByCountry.map(country =>{
           //   console.log(Object.keys(country)[0]);
@@ -48,7 +105,7 @@ export default class PandemicReport extends React.Component {
     }
     
     
-
+    
     render() {
       return (
         <div>
@@ -57,19 +114,7 @@ export default class PandemicReport extends React.Component {
             <h3>{this.state.data.numberOfRecovered}</h3>
             <h3>{this.state.data.activeCases}</h3>
             <h3>{this.state.data.closedCases}</h3>
-            <table style={{width: "100% "}}>
-                <tr>
-                  <th>Country</th>
-                  <th>Total Cases</th>
-                  <th>New Cases</th>
-                  <th>Total Deaths</th>
-                  <th>New Deaths</th>
-                  <th>Total Revocer</th>
-                  <th>Active Cases</th>
-                  <th>Critic</th>
-                </tr>
-                {this.state.countries}
-            </table>
+            <Table dataSource={this.state.countries} columns={this.columns} />
         </div>
       );
     }
