@@ -4,56 +4,13 @@ import axios from 'axios';
 import 'antd/dist/antd.css';
 import { Table } from 'antd';
 import HeaderCard from '../HeaderCard/HeaderCard';
+import columns from "./tableStructure";
 
 export default class PandemicReport extends React.Component {
     state = {
         data: [],
         countries : []
       }
-
-      // izdovjiti u json fajl
-      columns = [
-        {
-          title: 'Country',
-          dataIndex: 'country',
-          key: 'country',
-        },
-        {
-          title: 'Total Cases',
-          dataIndex: 'totalCases',
-          key: 'totalCases',
-        },
-        {
-          title: 'New Cases',
-          dataIndex: 'newCases',
-          key: 'newCases',
-        },
-        {
-          title: 'Total Deaths',
-          dataIndex: 'totalDeaths',
-          key: 'totalDeaths',
-        },
-        {
-          title: 'New Deaths',
-          dataIndex: 'newDeaths',
-          key: 'newDeaths',
-        },
-        {
-          title: 'Total Recover',
-          dataIndex: 'totalRecove',
-          key: 'totalRecove',
-        },
-        {
-          title: 'Active Cases',
-          dataIndex: 'activeCases',
-          key: 'activeCases',
-        },
-        {
-          title: 'Critic',
-          dataIndex: 'seriousCritic',
-          key: 'seriousCritic',
-        },
-      ];
 
     
     headers = {
@@ -110,7 +67,7 @@ export default class PandemicReport extends React.Component {
             <h3>{this.state.data.activeCases}</h3>
             <h3>{this.state.data.closedCases}</h3>
             <HeaderCard />
-            <Table dataSource={this.state.countries} columns={this.columns} />
+            <Table dataSource={this.state.countries} columns={columns} />
         </div>
       );
     }
