@@ -2,13 +2,14 @@ import React from 'react';
 
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import { Table } from 'antd';
+import { Layout,Space,Table } from 'antd';
 import HeaderCard from '../HeaderCard/HeaderCard';
 import columns from "./tableStructure";
 import headers from "./requestHeader";
 
 export default class PandemicReport extends React.Component {
-    state = {
+
+      state = {
         data      : [],
         countries : [],
         cardData  : []
@@ -53,10 +54,10 @@ export default class PandemicReport extends React.Component {
     
     render() {
       return (
-        <div>
+        <Layout>  
             {this.state.cardData}
             <Table dataSource={this.state.countries} columns={columns} />
-        </div>
+        </Layout>
       );
     }
   }

@@ -23,7 +23,9 @@ function HeaderCard(props){
     return(
         <Row gutter={16}>
             <Col span={24}>
-                <Statistic title={name} value={props.data.value} />
+                <Card>
+                    <Statistic title={name} value={props.data.value} />
+                </Card>
             </Col>
         </Row>
     );
