@@ -3,34 +3,34 @@ import React from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { Layout,Space,Table } from 'antd';
-import HeaderCard from '../HeaderCard/HeaderCard';
+import HeaderCards from '../HeaderCard/HeaderCards';
 import columns from "./tableStructure";
 import headers from "./requestHeader";
 
 export default class PandemicReport extends React.Component {
 
       state = {
-        data      : [],
-        countries : [],
-        cardData  : []
+        countries     : [],
+        headerRender  : {}
       }
 
     componentDidMount() {
-      axios.get(`http://localhost:5000/flask`,{ headers:headers})
+      axios.get(`http://localhost:5000/`,{ headers:headers})
         .then(res => {
           console.log(res.data);
-          this.setState({
-            data: res.data
-          })
+          // this.setState({
+          //   data: res.data
+          // })
 
-          const { groupByCountry, ...headerRender } = this.state.data;
+          const { groupByCountry, ...headerRender } = res.data;
+          console.log(headerRender);
           
-          let arrayOfHeaders = [];
-          for (const [key,value] of Object.entries(headerRender)){
-            arrayOfHeaders.push(<HeaderCard  data={{key,value}} />);
-          }
+          // let arrayOfHeaders = [];
+          // for (const [key,value] of Object.entries(headerRender)){
+          //   arrayOfHeaders.push(<HeaderCard  data={{key,value}} />);
+          // }
 
-          const state = groupByCountry.map(single => {
+          const countries = groupByCountry.map(single => {
             let object = single[Object.keys(single)[0]];
             
             return {
@@ -40,8 +40,8 @@ export default class PandemicReport extends React.Component {
             }
           })
           this.setState({
-            countries : state,
-            cardData  : arrayOfHeaders
+            countries,
+            headerRender
           });
           
         })
@@ -55,7 +55,7 @@ export default class PandemicReport extends React.Component {
     render() {
       return (
         <Layout>  
-            {this.state.cardData}
+            <HeaderCards  dataSource={this.state.headerRender}/>
             <Table dataSource={this.state.countries} columns={columns} />
         </Layout>
       );
