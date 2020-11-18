@@ -4,7 +4,6 @@ import 'antd/dist/antd.css';
 import { Table } from 'antd';
 import HeaderCards from '../../components/HeaderCards/HeaderCards';
 import columns from "./tableStructure";
-import PageLayout from "../../components/Layout/Layout";
 import getPandemicData from "../../services/getPandemicData";
 
 export default class PandemicReport extends React.Component {
@@ -46,10 +45,10 @@ export default class PandemicReport extends React.Component {
         
     render() {
       return (
-        <PageLayout>  
+        <div>  
             <HeaderCards  dataSource={this.state.globalStatistic}/>
             <Table dataSource={this.state.countries} columns={columns} />
-        </PageLayout>
+        </div>
       );
     }
     
