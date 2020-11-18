@@ -11,9 +11,9 @@ const titleByKey = {
 function HeaderCards({dataSource}){
     
     return(
-        <Row gutter={16}>
+        <Row gutter={[16,16]}>
             {Object.entries(dataSource).map(([key,value]) =>(
-                <Col span={24}>
+                <Col key={key} flex={2}>
                     <Card>
                         <Statistic title={titleByKey[key]} value={value} />
                     </Card>

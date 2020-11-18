@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
-import PandemicReport from './components/Pandemic/PandemicData';
+import PandemicReport from './pages/Pandemic/PandemicReport';
 
 function App() {
   return (
