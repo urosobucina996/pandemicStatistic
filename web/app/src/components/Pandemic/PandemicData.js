@@ -9,8 +9,9 @@ import headers from "./requestHeader";
 
 export default class PandemicReport extends React.Component {
     state = {
-        data: [],
-        countries : []
+        data      : [],
+        countries : [],
+        cardData  : []
       }
 
     componentDidMount() {
@@ -20,7 +21,15 @@ export default class PandemicReport extends React.Component {
           this.setState({
             data: res.data
           })
-          const state = this.state.data.groupByCountry.map(single => {
+
+          const { groupByCountry, ...headerRender } = this.state.data;
+          
+          let arrayOfHeaders = [];
+          for (const [key,value] of Object.entries(headerRender)){
+            arrayOfHeaders.push(<HeaderCard  data={{key,value}} />);
+          }
+
+          const state = groupByCountry.map(single => {
             let object = single[Object.keys(single)[0]];
             
             return {
@@ -30,7 +39,8 @@ export default class PandemicReport extends React.Component {
             }
           })
           this.setState({
-            countries : state
+            countries : state,
+            cardData  : arrayOfHeaders
           });
           
         })
@@ -44,12 +54,7 @@ export default class PandemicReport extends React.Component {
     render() {
       return (
         <div>
-            <h2>{this.state.data.numberOfCases}</h2>
-            <h3>{this.state.data.numberOfDeaths}</h3>
-            <h3>{this.state.data.numberOfRecovered}</h3>
-            <h3>{this.state.data.activeCases}</h3>
-            <h3>{this.state.data.closedCases}</h3>
-            <HeaderCard />
+            {this.state.cardData}
             <Table dataSource={this.state.countries} columns={columns} />
         </div>
       );
