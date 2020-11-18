@@ -37,7 +37,7 @@ export default function PageLayout({children, links}){
                 {children}
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+          <Footer style={{ textAlign: 'center' }}>Uros Obucina &copy; 2020</Footer>
         </Layout>
       );
 }
