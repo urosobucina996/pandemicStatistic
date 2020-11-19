@@ -7,9 +7,10 @@ import {
 
 import './App.css';
 import PandemicReport from './pages/Pandemic/PandemicReport';
-import Contact from "./pages/Contact/Concat";
+//import Contact from "./pages/Contact/Concat";
 import About from "./pages/About/About";
 import PageLayout from "./components/Layout/Layout";
+import NewContact from "./pages/Contact/NewContact";
 
 const links = [
   {
@@ -42,7 +43,7 @@ function App() {
               <About />
             </Route>
             <Route exact path="/contact">
-              <Contact />
+              <NewContact />
             </Route>
             <Redirect to='/report' />
           </Switch>
