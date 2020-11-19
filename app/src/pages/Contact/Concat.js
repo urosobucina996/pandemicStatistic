@@ -21,11 +21,11 @@ export default function Contact() {
     };
 
     const onFinish = values => {
-        console.log(values);
+        const {user} = values;
         const templateParams = {
-            from_name: values.email,
-            to_name: 'user_RNv67L5T5exWqCES7xu9q',
-            subject: values.introduction,
+            from_name: user.email,
+            to_name: user.email,
+            subject: user.introduction,
        }
       
         emailjs.send(
