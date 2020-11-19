@@ -1,8 +1,9 @@
 {
     "version": 2,
+    "name": "pandemic-report-api",
     "builds": [
         {
-            "src": "./app.py",
+            "src": "./index.py",
             "use": "@vercel/python"
         }
     ],
