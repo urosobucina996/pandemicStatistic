@@ -18,15 +18,19 @@ export default function Contact() {
         },
     };
 
+    const onFinish = values => {
+        console.log(values);
+      };
+
 
     return (
         <div>
             <h1 style={{textAlignVertical: "center",textAlign: "center"}}>Contact</h1>
-            <Form {...layout} name="nest-messages" validateMessages={validateMessages}>
+            <Form {...layout} onFinish={onFinish}s name="nest-messages" validateMessages={validateMessages}>
                 <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item name={['user', 'email']} label="Email" rules={[{ type: 'email' }]}>
+                <Form.Item name={['user', 'email']} label="Email" rules={[{ type: 'email', required: true }]}>
                     <Input />
                 </Form.Item>
                 <Form.Item name={['user', 'introduction']} label="Introduction">
@@ -34,7 +38,7 @@ export default function Contact() {
                 </Form.Item>
                 <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                     <Button type="primary" htmlType="submit">
-                    Submit
+                        Submit
                     </Button>
                 </Form.Item>
             </Form>
