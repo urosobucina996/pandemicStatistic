@@ -1,4 +1,6 @@
 import { Form, Input, InputNumber, Button } from 'antd';
+import emailjs from 'emailjs-com';
+emailjs.init("user_RNv67L5T5exWqCES7xu9q");
 
 export default function Contact() {
 
@@ -20,6 +22,22 @@ export default function Contact() {
 
     const onFinish = values => {
         console.log(values);
+        const templateParams = {
+            from_name: values.email,
+            to_name: 'user_RNv67L5T5exWqCES7xu9q',
+            subject: values.introduction,
+       }
+      
+        emailjs.send(
+            'service_f16yxjl', 
+            'template_r5i61qt',
+            templateParams,
+            'user_RNv67L5T5exWqCES7xu9q'
+            ).then(res => {
+              console.log('Email successfully sent!')
+            })
+            // Handle errors here however you like, or use a React error boundary
+            .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
       };
 
 
