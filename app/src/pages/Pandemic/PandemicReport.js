@@ -5,12 +5,14 @@ import { Table } from 'antd';
 import HeaderCards from '../../components/HeaderCards/HeaderCards';
 import columns from "./tableStructure";
 import getPandemicData from "../../services/getPandemicData";
+import {BounceLoader} from "react-spinners";
 
 export default class PandemicReport extends React.Component {
 
     state = {
       countries        : [],
-      globalStatistic  : {}
+      globalStatistic  : {},
+      loading          : false
     }
 
     componentDidMount() {
@@ -34,7 +36,8 @@ export default class PandemicReport extends React.Component {
 
         this.setState({
           countries,
-          globalStatistic
+          globalStatistic,
+          loading : true
         });
         
       })
@@ -47,7 +50,13 @@ export default class PandemicReport extends React.Component {
       return (
         <div>  
             <HeaderCards  dataSource={this.state.globalStatistic}/>
-            <Table dataSource={this.state.countries} columns={columns} />
+            {this.state.loading ? (
+              <Table dataSource={this.state.countries} columns={columns} />
+            ) : (
+              <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+                <BounceLoader size={70} />
+              </div>
+            )}         
         </div>
       );
     }
