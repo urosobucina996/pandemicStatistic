@@ -18,8 +18,8 @@ export default function PageLayout({children, links}){
     return (
         <Layout className="layout">
           <Header>
-            {/* <div className="logo" /> */}
-            <Menu theme="dark" mode="horizontal" selectedKeys={[currentRoute?.key]}>
+            <div className="logo" />
+            <Menu style={{float: 'right'}} theme="dark" mode="horizontal" selectedKeys={[currentRoute?.key]}>
               {links.map( ({key,title,to}) => <Menu.Item key={key}>
                   <Link to={to}>
                     {title}

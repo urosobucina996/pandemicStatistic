@@ -1,65 +1,48 @@
-import { Form, Input, InputNumber, Button } from 'antd';
-import emailjs from 'emailjs-com';
-emailjs.init("user_RNv67L5T5exWqCES7xu9q");
+import React from "react";
 
-export default function Contact() {
+import { Form, Input, Button, message } from 'antd';
 
-    const layout = {
-        labelCol: { span: 7 },
-        wrapperCol: { span: 12 },
-      };
-      
-    const validateMessages = {
-        required: '${label} is required!',
-        types: {
-        email: '${label} is not a valid email!',
-        number: '${label} is not a valid number!',
-        },
-        number: {
-        range: '${label} must be between ${min} and ${max}',
-        },
+import sendMail from "../../services/sendMail";
+
+export default class Contact extends React.Component {
+  constructor(props) {
+    super(props);
+    this.submitForm = this.submitForm.bind(this);
+    this.state = {
+      status: ""
     };
+  }
 
-    const onFinish = values => {
-        const {user} = values;
-        const templateParams = {
-            from_name: user.email,
-            to_name: user.email,
-            subject: user.introduction,
-       }
-      
-        emailjs.send(
-            'service_f16yxjl', 
-            'template_r5i61qt',
-            templateParams,
-            'user_RNv67L5T5exWqCES7xu9q'
-            ).then(res => {
-              console.log('Email successfully sent!')
-            })
-            // Handle errors here however you like, or use a React error boundary
-            .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
-      };
-
-
+  render() {
+    const { status } = this.state;
     return (
-        <div>
-            <h1 style={{textAlignVertical: "center",textAlign: "center"}}>Contact</h1>
-            <Form {...layout} onFinish={onFinish}s name="nest-messages" validateMessages={validateMessages}>
-                <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item name={['user', 'email']} label="Email" rules={[{ type: 'email', required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item name={['user', 'introduction']} label="Introduction">
-                    <Input.TextArea />
-                </Form.Item>
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
-        </div>
+        <Form onFinish={this.submitForm} name="nest-messages">
+              <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
+                  <Input />
+              </Form.Item>
+              <Form.Item name={['user', 'email']} label="Email" rules={[{ type: 'email', required: true }]}>
+                  <Input />
+              </Form.Item>
+              <Form.Item name={['user', 'introduction']} label="Introduction">
+                  <Input.TextArea />
+              </Form.Item>
+              <Form.Item wrapperCol={{ offset: 8 }}>
+                  <Button type="primary" htmlType="submit">
+                      Submit
+                  </Button>
+              </Form.Item>
+          </Form>
     );
+  }
+
+  
+  submitForm = ({user}) => {
+    sendMail(user)
+    .then(({data}) => {
+      message.success('Mail was sent!', 5);
+    })
+    .catch( err => {
+        message.error('Mail wasn\'t sent!', 5);
+    });
+  }
 }
