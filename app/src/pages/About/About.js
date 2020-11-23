@@ -3,6 +3,7 @@ import { Result, Button } from 'antd';
 export default function About() {
     return (
         <Result
+        className='content-position'
         status="success"
         title="We built report about pandemic."
         subTitle="Daily report show global and Balkan region statistic."
