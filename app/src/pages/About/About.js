@@ -3,6 +3,7 @@ import { Result, Button } from 'antd';
 export default function About() {
     return (
         <Result
+        className={'content-position'}
         style={{
           position: 'absolute', 
           left: '50%', top: '50%',
