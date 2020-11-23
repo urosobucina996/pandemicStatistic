@@ -51,7 +51,7 @@ export default class PandemicReport extends React.Component {
         <div>  
             <HeaderCards  dataSource={this.state.globalStatistic}/>
             {this.state.loading ? (
-              <Table dataSource={this.state.countries} columns={columns} />
+              <Table dataSource={this.state.countries} columns={columns} scroll={{ x: 1000 }} />
             ) : (
               <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
                 <BounceLoader size={70} />
