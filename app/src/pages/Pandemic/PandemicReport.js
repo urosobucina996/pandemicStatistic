@@ -7,6 +7,13 @@ import columns from "./tableStructure";
 import getPandemicData from "../../services/getPandemicData";
 import {BounceLoader} from "react-spinners";
 
+const style = {
+  position: "fixed",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)"
+}
+
 export default class PandemicReport extends React.Component {
 
     state = {
@@ -24,7 +31,7 @@ export default class PandemicReport extends React.Component {
 
         const countries = groupByCountry.map(single => {
 
-          const countryName = Object.keys(single)[0];
+          const [countryName] = Object.keys(single);
           const countryData = single[countryName];
           
           return {
@@ -47,13 +54,14 @@ export default class PandemicReport extends React.Component {
     }
         
     render() {
+      const {countries, globalStatistic, loading} = this.state;
       return (
         <div>  
-            <HeaderCards  dataSource={this.state.globalStatistic}/>
-            {this.state.loading ? (
-              <Table dataSource={this.state.countries} columns={columns} scroll={{ x: 1000 }} />
+            <HeaderCards  dataSource={ globalStatistic }/>
+            { loading ? (
+              <Table dataSource={countries} columns={columns} scroll={{ x: 1000 }} />
             ) : (
-              <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+              <div style={ style }>
                 <BounceLoader size={70} />
               </div>
             )}         

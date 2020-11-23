@@ -1,9 +1,9 @@
 .site-layout-content{
     min-height: 73vh !important;
 }
-/* .content-position{
-    position: 'absolute' !important; 
-    left: '50%' !important;
-    top: '50%' !important;
-    transform: 'translate(-50%, -50%)' !important;
-} */
+.content-position{
+    position: absolute !important; 
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}

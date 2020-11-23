@@ -16,14 +16,7 @@ export default class Contact extends React.Component {
   render() {
     const { status } = this.state;
     return (
-        <Form onFinish={this.submitForm} name="nest-messages" className={'content-position'} 
-          style={{
-            position: 'absolute', 
-            left: '50%', top: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 'auto'
-          }}
-        >
+        <Form onFinish={this.submitForm} name="nest-messages" className='content-position'>
               <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
                   <Input />
               </Form.Item>
