@@ -31,13 +31,9 @@ export default class PandemicReport extends React.Component {
 
         const countries = groupByCountry.map(single => {
 
-          const [countryName] = Object.keys(single);
-          const countryData = single[countryName];
-          
           return {
-            key          : countryName,
-            country      : countryName,
-            ...countryData
+            key : single['country'],
+            ...single
           }
         })
 
