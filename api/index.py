@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 from graphene import ObjectType, String, Schema
 from modules import scraper
 import time
+import json
 
 
 app = Flask(__name__)
@@ -35,11 +36,18 @@ def start():
 
     print(time.time()-start," seconds")
 
-@app.route('/graphql', methods=['POST'])
-def graph():
-    req_data = request.get_json()
-    return req_data['name']
-    #return request.data
+#@app.route('/graphql', methods=['POST'])
+#def graph():
+    #req_data = json.loads(request.get_data())
+    #print(type(request.get_data()))
+    #print(req_data['query'])
+    #result = schema.execute(req_data['query'])
+    #print(result.data)
+    #print(dir(result))
+    #return json.dumps(result.data)
+    #result = schema.execute(req_data['query'])
+    #print(result.data['hello'])
+    #return req_data
 
 if __name__ == '__main__':
    app.run(debug = True)
