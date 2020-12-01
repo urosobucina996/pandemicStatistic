@@ -7,8 +7,8 @@ import json
 from models.worldwidedata import WorldWideData
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}},support_credentials=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app, resources={r"/*": {"origins": "https://pandemic-report-api.vercel.app/"}},support_credentials=True)
 
 
 class Query(ObjectType):  
