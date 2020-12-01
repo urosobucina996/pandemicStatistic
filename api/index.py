@@ -28,9 +28,10 @@ class Query(ObjectType):
     
 
 schema = Schema(query=Query)
+@cross_origin(supports_credentials=True)
 
 # @app.route('/', methods=['GET'])
-# @cross_origin(supports_credentials=True)
+#@cross_origin(supports_credentials=True)
 # def start():
 #     start = time.time()
 #     try:
