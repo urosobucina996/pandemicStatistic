@@ -19,7 +19,7 @@ export default class PandemicReport extends React.Component {
     state = {
       countries        : [],
       globalStatistic  : {},
-      loading          : false
+      loading          : true
     }
 
     componentDidMount() {
@@ -27,7 +27,8 @@ export default class PandemicReport extends React.Component {
       getPandemicData()
       .then(({data}) => {
 
-        const { groupByCountry, ...globalStatistic } = data;
+        const { worldwide } = data;
+        const { groupByCountry, ...globalStatistic } = worldwide;
 
         const countries = groupByCountry.map(single => {
 
@@ -40,7 +41,7 @@ export default class PandemicReport extends React.Component {
         this.setState({
           countries,
           globalStatistic,
-          loading : true
+          loading : false
         });
         
       })
@@ -55,11 +56,11 @@ export default class PandemicReport extends React.Component {
         <div>  
             <HeaderCards  dataSource={ globalStatistic }/>
             { loading ? (
-              <Table dataSource={countries} columns={columns} scroll={{ x: 1000 }} />
-            ) : (
               <div style={ style }>
                 <BounceLoader size={70} />
               </div>
+            ) : (
+              <Table dataSource={countries} columns={columns} scroll={{ x: 1000 }} />
             )}         
         </div>
       );

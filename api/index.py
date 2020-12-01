@@ -9,8 +9,7 @@ from models.worldwidedata import WorldWideData
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
-data = scraper.parseHtml('https://www.worldometers.info/coronavirus/')
-jsonData = json.loads(data)
+
 
 class Query(ObjectType):  
 
@@ -22,23 +21,25 @@ class Query(ObjectType):
 
     def resolve_worldwide(parent, info):
 
+        data = scraper.parseHtml('https://www.worldometers.info/coronavirus/')
+        jsonData = json.loads(data)
         return jsonData
         
     
 
 schema = Schema(query=Query)
 
-@app.route('/', methods=['GET'])
-@cross_origin(supports_credentials=True)
-def start():
-    start = time.time()
-    try:
-        return scraper.parseHtml('https://www.worldometers.info/coronavirus/')
+# @app.route('/', methods=['GET'])
+# @cross_origin(supports_credentials=True)
+# def start():
+#     start = time.time()
+#     try:
+#         return scraper.parseHtml('https://www.worldometers.info/coronavirus/')
 
-    except Exception as e:
-        print(e)
+#     except Exception as e:
+#         print(e)
 
-    print(time.time()-start," seconds")
+#     print(time.time()-start," seconds")
 
 @app.route('/graphql', methods=['POST'])
 def graph():
