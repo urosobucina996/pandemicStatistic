@@ -28,7 +28,6 @@ class Query(ObjectType):
     
 
 schema = Schema(query=Query)
-@cross_origin(supports_credentials=True)
 
 # @app.route('/', methods=['GET'])
 #@cross_origin(supports_credentials=True)
@@ -43,6 +42,7 @@ schema = Schema(query=Query)
 #     print(time.time()-start," seconds")
 
 @app.route('/graphql', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def graph():
     req_data = json.loads(request.get_data())
     result = schema.execute(req_data['query'])

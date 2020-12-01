@@ -1,5 +1,5 @@
 from graphene import ObjectType, String, Int, Float, List, Field
-
+ 
 class CountryData(ObjectType):
     ''' All data of certian country '''
     country = String(description="Name of country for statistic")
