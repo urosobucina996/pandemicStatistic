@@ -7,9 +7,8 @@ import json
 from models.worldwidedata import WorldWideData
 
 app = Flask(__name__)
-app.config['CORS_HEADERS'] = 'application/json'
 CORS(app, resources={r"/*": {"origins": "*"}},support_credentials=True)
-
+app.config['CORS_HEADERS'] = 'application/json'
 
 
 class Query(ObjectType):  
