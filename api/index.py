@@ -2,14 +2,13 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from graphene import ObjectType, Schema, Field, List
 from modules import scraper
-import time
 import json
 from models.worldwidedata import WorldWideData
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
-CORS(app, resources={r"/*": {"origins": "https://pandemic-report-api.vercel.app/"}},support_credentials=True)
-
+CORS(app,support_credentials=True)
+#resources={r"/*": {"origins": "https://pandemic-report-api.vercel.app/"}}
 
 class Query(ObjectType):  
 
@@ -28,18 +27,6 @@ class Query(ObjectType):
     
 
 schema = Schema(query=Query)
-
-# @app.route('/', methods=['GET'])
-#@cross_origin(supports_credentials=True)
-# def start():
-#     start = time.time()
-#     try:
-#         return scraper.parseHtml('https://www.worldometers.info/coronavirus/')
-
-#     except Exception as e:
-#         print(e)
-
-#     print(time.time()-start," seconds")
 
 @app.route('/graphql', methods=['POST'])
 @cross_origin(supports_credentials=True)
