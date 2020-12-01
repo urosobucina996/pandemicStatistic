@@ -7,7 +7,7 @@ from models.worldwidedata import WorldWideData
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
-CORS(app)
+CORS(app, support_credentials=True)
 #resources={r"/*": {"origins": "https://pandemic-report-api.vercel.app/"}} ,support_credentials=True
 
 class Query(ObjectType):  
@@ -29,7 +29,7 @@ class Query(ObjectType):
 schema = Schema(query=Query)
 
 @app.route('/graphql', methods=['POST'])
-@cross_origin()
+@cross_origin(support_credentials=True)
 def graph():
     req_data = json.loads(request.get_data())
     result = schema.execute(req_data['query'])
