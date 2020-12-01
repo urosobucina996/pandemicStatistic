@@ -8,7 +8,7 @@ from models.worldwidedata import WorldWideData
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}},support_credentials=True)
-app.config['CORS_HEADERS'] = 'application/json'
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 class Query(ObjectType):  
