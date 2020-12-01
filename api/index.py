@@ -7,6 +7,7 @@ import json
 from models.worldwidedata import WorldWideData
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app, support_credentials=True)
 
 
