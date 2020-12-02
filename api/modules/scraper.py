@@ -4,7 +4,10 @@ from bs4 import BeautifulSoup as soup
 import sys 
 import json
 
-HEADERS = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
+HEADERS = {'User-Agent': '''Mozilla/5.0 (Macintosh;
+                            Intel Mac OS X 10_9_3) 
+                            AppleWebKit/537.36 (KHTML, like Gecko) 
+                            Chrome/35.0.1916.47 Safari/537.36'''}
 
 def parseHtml(url):
     
@@ -16,7 +19,6 @@ def parseHtml(url):
         print(f"Web site in not responding, server error {uClient.status_code}.")
         exit(0) 
 
-    #html parsing
     # Connect to the URL
     parsedPage = soup(pageHtml,"html.parser")
     tag     = parsedPage.body
@@ -47,8 +49,6 @@ def parseHtml(url):
             "seriousCritic" : countryData[9].text
         })
 
-    #Get data about Serbia
-    #soup.select('#main_table_countries_today tr:has(> td:contains("Serbia"))')
 
     tempCasesData = []
 
@@ -72,5 +72,3 @@ def parseHtml(url):
     }
 
     return json.dumps(data)
-    
-    #return tag.findAll('div',{'class':'maincounter-number'})
