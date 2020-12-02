@@ -50,17 +50,9 @@ def parseHtml(url):
         })
 
 
-    tempCasesData = []
+    tempCasesData = [int(single.text.replace(',','')) for single in cases]
 
-    for single in cases:
-        tempCasesData.append(int(single.text.replace(',','')))
-
-   
-    tempData = []
-
-    for single in numbers:
-        
-        tempData.append(int(single.find('span').text.replace(',','')))
+    tempData = [int(single.find('span').text.replace(',','')) for single in numbers]
 
     data = {
         "numberOfCases" : tempData[0],
