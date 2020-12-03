@@ -1,8 +1,8 @@
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-from graphene import ObjectType, Schema, Field, List
-from modules import scraper
+from graphene import ObjectType, Schema, Field
 import json
+from modules import scraper
 from models.worldwidedata import WorldWideData
 
 app = Flask(__name__)
@@ -19,7 +19,7 @@ class Query(ObjectType):
 
     def resolve_worldwide(parent, info):
 
-        data = scraper.parseHtml('https://www.worldometers.info/coronavirus/')
+        data = scraper.parsehtml('https://www.worldometers.info/coronavirus/')
         jsonData = json.loads(data)
         return jsonData
         
