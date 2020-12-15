@@ -11,17 +11,17 @@ HEADERS = {'User-Agent': '''Mozilla/5.0 (Macintosh;
 
 def parsehtml(url):
     
-    uClient = req.get(url,HEADERS)
-    pageHtml = uClient.content
+    u_client = req.get(url,HEADERS)
+    page_html = u_client.content
 
     # 301 is redirection, may couse trouble
-    if uClient.status_code != 200:
-        print(f"Web site in not responding, server error {uClient.status_code}.")
+    if u_client.status_code != 200:
+        print(f"Web site in not responding, server error {u_client.status_code}.")
         exit(0) 
 
     # Connect to the URL
-    parsedPage = soup(pageHtml,"html.parser")
-    tag     = parsedPage.body
+    parsed_page = soup(page_html,"html.parser")
+    tag     = parsed_page.body
     
     #Global numbers
     numbers = tag.findAll('div',{'class':'maincounter-number'})
@@ -36,30 +36,30 @@ def parsehtml(url):
     for state in ["Serbia","Bosnia and Herzegovina","Bulgaria","Montenegro","Croatia"]:
         
         table   = tag.select("#main_table_countries_today tr:has(> td:contains(\""+state+"\"))")
-        countryData = table[0].find_all('td')
+        country_data = table[0].find_all('td')
 
         countries.append({ 
             "country" : state,
-            "totalCases" : countryData[2].text,
-            "newCases" : countryData[3].text,
-            "totalDeaths" : countryData[4].text,
-            "newDeaths" : countryData[5].text,
-            "totalRecove" : countryData[6].text,
-            "activeCases" : countryData[8].text,
-            "seriousCritic" : countryData[9].text
+            "totalCases" : country_data[2].text,
+            "newCases" : country_data[3].text,
+            "totalDeaths" : country_data[4].text,
+            "newDeaths" : country_data[5].text,
+            "totalRecove" : country_data[6].text,
+            "activeCases" : country_data[8].text,
+            "seriousCritic" : country_data[9].text
         })
 
 
-    tempCasesData = [int(single.text.replace(',','')) for single in cases]
+    temp_cases_data = [int(single.text.replace(',','')) for single in cases]
 
-    tempData = [int(single.find('span').text.replace(',','')) for single in numbers]
+    temp_data = [int(single.find('span').text.replace(',','')) for single in numbers]
 
     data = {
-        "numberOfCases" : tempData[0],
-        "numberOfDeaths" : tempData[1],
-        "numberOfRecovered" : tempData[2],
-        "activeCases" : tempCasesData[0],
-        "closedCases" : tempCasesData[1],
+        "numberOfCases" : temp_data[0],
+        "numberOfDeaths" : temp_data[1],
+        "numberOfRecovered" : temp_data[2],
+        "activeCases" : temp_cases_data[0],
+        "closedCases" : temp_cases_data[1],
         "groupByCountry" : countries
     }
 
