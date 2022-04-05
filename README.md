@@ -1,4 +1,5 @@
 Pandemic reports data scraped from official covid-19 site.
+Url: https://pandemic-report-urosobucina996.vercel.app/report
 Application represents few countries and all data for that countries.
 
 api folder contains:
